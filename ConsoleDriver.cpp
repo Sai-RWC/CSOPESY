@@ -41,8 +41,12 @@ void ConsoleDriver::drawConsole() const
     if (this->currentConsole != nullptr) {
         this->currentConsole->display();
     }
-    std::cerr << "There is no assigned console. Please check." << std::endl;
+    else
+    {
+        std::cerr << "There is no assigned console. Please check." << std::endl;
+    }
 }
+
 
 void ConsoleDriver::process() const
 {
@@ -102,7 +106,6 @@ void ConsoleDriver::switchToScreen(String screenName)
     if (this->consoleTable.find(screenName) != this->consoleTable.end()) {
         system("cls");
         // disables `Enter a command:` prompt within MainConsole when entering a screen
-        this->mainConsole->setOutMain();
         this->previousConsole = this->currentConsole;
         this->currentConsole = this->consoleTable[screenName];
         this->currentConsole->onEnabled();
@@ -117,10 +120,6 @@ void ConsoleDriver::switchToScreen(String screenName)
 void ConsoleDriver::returnToPreviousConsole()
 {
     if (this->previousConsole != nullptr) {
-        // Manages "Enter a command: " output from MainConsole within BaseScreen
-        // might need to update this since it will do so for every return to console
-        // in the future; such as MarqueeConsole and SchedulingConsole
-        this->mainConsole->setInMain();
         this->switchConsole(this->previousConsole->getName());
         this->previousConsole = nullptr;
     }
@@ -164,7 +163,7 @@ ConsoleDriver::ConsoleDriver()
 {
     this->running = true;
 
-    this->consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    
 
     const std::shared_ptr<MainConsole> mainConsole = std::make_shared<MainConsole>();
     // const std::shared_ptr<MarqueeConsole> mainConsole = std::make_shared<MarqueeConsole>();

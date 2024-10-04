@@ -6,7 +6,7 @@
 #include "MarqueeConsole.h"
 #include "AConsole.h"
 #include "ConsoleDriver.h"
-// #include "KeyboardHandler.h"
+#include "MarqueeWorker.h"
 
 
 MarqueeConsole::MarqueeConsole() : AConsole(MARQUEE_CONSOLE)
@@ -17,26 +17,28 @@ MarqueeConsole::MarqueeConsole() : AConsole(MARQUEE_CONSOLE)
 
 void MarqueeConsole::onEnabled()
 {
-    this->display();
+    this->showHeader();
 }
 
 void MarqueeConsole::display()
 {
-    this->showHeader();
+    // this->showHeader();
 }
 
 void MarqueeConsole::process()
 {
     String sInput;
     KeyboardEventHandler keyboardHandler;
-    ConsoleDriver::getInstance()->setCursorPosition(10, 10);
+    this->showHeader();
     PollKeyboard(keyboardHandler);
+
+    
     // std::getline(std::cin, sInput);
 }
 
+// TODO: cleanup Header file in Marqueeconsole
 void MarqueeConsole::showHeader() const
 {
-    // https://stackoverflow.com/questions/14921887/how-can-i-align-text-to-the-center-in-terminal
     std::cerr << "*****************************************" << std::endl;
     std::cerr << "* Displaying a marquee console ! *" << std::endl;
     std::cerr << "*****************************************" << std::endl;

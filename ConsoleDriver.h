@@ -40,7 +40,7 @@ class ConsoleDriver {
         HANDLE getConsoleHandle() const;
 
         // DEBUG PURPOSES
-        void printTest() const;
+        // void printTest() const;
         
     private:
         ConsoleDriver();
@@ -56,6 +56,6 @@ class ConsoleDriver {
         const std::shared_ptr<MainConsole> mainConsole = std::make_shared<MainConsole>();
         const std::shared_ptr<MarqueeConsole> marqueeConsole = std::make_shared<MarqueeConsole>();
 
-        HANDLE consoleHandle;
+        HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
         bool running = true;
 };

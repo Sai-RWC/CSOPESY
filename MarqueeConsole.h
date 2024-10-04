@@ -1,9 +1,8 @@
 #pragma once
 #include "AConsole.h"
-#include "KeyboardHandler.h"
+#include "MarqueeWorker.h"
 
-static constexpr int REFRESH_DELAY = 10;
-static constexpr int POLLING_DELAY = 5;
+
 
 class MarqueeConsole : public AConsole 
 {
